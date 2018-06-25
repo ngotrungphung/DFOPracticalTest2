@@ -1,0 +1,82 @@
+﻿<div class="container-fluid">
+    <div class="container">
+
+        <div class="pull-right action-button" style="padding:5px">
+            <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#createMenu">Create New <i class="fa fa-plus" aria-hidden="true"></i></button>            
+        </div>
+        <div class="container">
+            <div class="input-group col-xs-4  pull-right filter-box" style="z-index:0">
+                <input type="text" class="form-control input-sm" placeholder="Filter" ng-model="search.$">
+                <span class="input-group-btn">
+                    <button class="btn btn-default input-sm" type="button" ng-click="search.$ = ''" title="Clear">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+        <table class="table table-striped table-hover table-bordered full-width-table">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        Menu Name
+                    </th>
+                    <th class="text-center">URL</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="menu in vm.allMenu | filter: search">            
+                <tr>
+                    <td>
+                        <a href="javascript:;" data-toggle="modal" data-target="#editMenu" ng-click="vm.initUpdateMenu(menu)" style="font-weight:bold">{{menu.MenuName}}</a>
+                    </td>
+                    <td>{{menu.URL}}</td>
+                    <td class="text-center action-button">
+                        <i class="glyphicon glyphicon-pencil pointer" title="Edit" ng-click="vm.initUpdateMenu(menu)" data-toggle="modal" data-target="#editMenu"></i>
+                        <i class="glyphicon glyphicon-trash pointer" title="Delete" ng-click="vm.initDeleteMenu(menu)" data-toggle="modal" data-target="#deleteMenu"></i>
+                    </td>
+                </tr>
+                
+                <tr ng-repeat-start="childMenu in menu.ChildMenus | filter: search" ng-if="false"></tr>
+                <tr>
+                    <td>
+                        <a href="javascript:;" data-toggle="modal" data-target="#editMenu" ng-click="vm.initUpdateMenu(childMenu)" > - {{childMenu.MenuName}}</a>
+                    </td>
+                    <td>{{childMenu.URL}}</td>
+                    <td class="text-center action-button">
+                        <i class="glyphicon glyphicon-pencil pointer" title="Edit" ng-click="vm.initUpdateMenu(childMenu)" data-toggle="modal" data-target="#editMenu"></i>
+                        <i class="glyphicon glyphicon-trash pointer" title="Delete" ng-click="vm.initDeleteMenu(childMenu)" data-toggle="modal" data-target="#deleteMenu"></i>
+                    </td>
+                </tr>
+                <tr ng-repeat-start="child in childMenu.ChildMenus | filter: search" ng-if="false"></tr>
+                <tr>
+                    <td>
+                        <a href="javascript:;" data-toggle="modal" data-target="#editMenu" ng-click="vm.initUpdateMenu(child)"> ---- {{child.MenuName}}</a>
+                    </td>
+                    <td>{{child.URL}}</td>
+                    <td class="text-center action-button">
+                        <i class="glyphicon glyphicon-pencil pointer" title="Edit" ng-click="vm.initUpdateMenu(child)" data-toggle="modal" data-target="#editMenu"></i>
+                        <i class="glyphicon glyphicon-trash pointer" title="Delete" ng-click="vm.initDeleteMenu(child)" data-toggle="modal" data-target="#deleteMenu"></i>
+                    </td>
+                </tr>
+                <tr ng-repeat="child2 in child.ChildMenus" ng-if="!$first">
+                    <td>
+                        <a href="javascript:;" data-toggle="modal" data-target="#editMenu" ng-click="vm.initUpdateMenu(child2)"> -------- {{child2.MenuName}}</a>
+                    </td>
+                    <td>{{child2.URL}}</td>
+                    <td class="text-center action-button">
+                        <i class="glyphicon glyphicon-pencil pointer" title="Edit" ng-click="vm.initUpdateMenu(child2)" data-toggle="modal" data-target="#editMenu"></i>
+                        <i class="glyphicon glyphicon-trash pointer" title="Delete" ng-click="vm.initDeleteMenu(child2)" data-toggle="modal" data-target="#deleteMenu"></i>
+                    </td>
+                </tr>
+
+                <tr ng-if="false" ng-repeat-end></tr>
+                <tr ng-if="false" ng-repeat-end></tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<ng-include src="'app/pages/home/menu/create.html'"></ng-include>
+<ng-include src="'app/pages/home/menu/edit.html'"></ng-include>
+<ng-include src="'app/pages/home/menu/delete.html'"></ng-include>

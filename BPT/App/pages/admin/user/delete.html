@@ -1,0 +1,12 @@
+﻿<div class="modal fade" id="deleteUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">Delete User</div>
+            <div class="modal-body"><p>Are you sure you want to delete the user - <strong class="text-primary">{{vm.deleteuser.Name}}</strong>?</p></div>
+            <div class="modal-footer">
+                <a id="bt-modal-cancel" href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                <a id="bt-modal-confirm" class="btn btn-danger btn-ok" ng-click="vm.deleteUser(vm.deleteuser.ID)"  data-dismiss="modal">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>

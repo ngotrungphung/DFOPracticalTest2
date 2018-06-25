@@ -1,0 +1,80 @@
+﻿<div class="filter-Revenue row" id="planbarSection">
+    <div class="col-xs-4 col-md-2 col-lg-2 form-group filter-box">
+        <label class="control-label">Planning Year</label>
+        <select class="form-control" id="years" name="years" ng-model="vm.selectedYear" ng-change="vm.loadtime(vm.selectedYear)"
+            ng-options="year as year for year in vm.listYear track by year">
+        </select>
+    </div>
+    <div class="col-xs-4 col-md-2 col-lg-2  form-group filter-box">
+        <label class="control-label">Plan Type</label>
+        <select name="ddlPlanType" id="ddlPlanType" class="form-control" ng-model="vm.timeline" ng-change="vm.setCookieSelectedTimeline(); vm.getFundCenterParents(vm.timeline.Id)" ng-options="timeline as timeline.Planning for timeline in vm.listTimeline track by timeline.Id">
+        </select>
+    </div>
+    <div class="col-xs-4 col-md-2 col-lg-2 form-group filter-box">
+        <label class="control-label">Fund Center</label>
+        <select class="form-control" id="fundCenter" name="fundCenter" ng-model="vm.seletedFundCenterParent" ng-change="vm.setCookieSeletedFundCenterParent(); vm.getDepartments(vm.seletedFundCenterParent.FundId)" ng-options="fundCenter as fundCenter.FundCode for fundCenter in vm.fundCenterParents track by fundCenter.FundId"></select>
+    </div>
+    <div class="col-xs-4 col-md-2 col-lg-2 form-group filter-box">
+        <label class="control-label">Function</label>
+        <select class="form-control" id="dept" name="dept" ng-model="vm.seletedDepartment" ng-change="vm.setCookieSeletedFunction(); vm.changeFilter()" ng-options="fundCenter as fundCenter.FundCode for fundCenter in vm.departments track by fundCenter.FundId">
+        </select>
+    </div>
+
+    <div class="col-xs-4 col-md-2 col-lg-2 form-group filter-box" ng-if="vm.isDashboard">
+        <label class="control-label">Actual Month</label>
+        <div class='input-group date' id='actualTerm'>
+            
+            <input type='text' class="form-control" data-date-format="mm/yyyy" ng-model="vm.actualMonth" ng-change="vm.changeFilter()"/>
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar">
+                </span>
+            </span>
+        </div>
+    </div>
+
+
+        <div class="col-xs-12 col-md-6 col-lg-4 form-group filter-box" ng-if="vm.isOnlyShowFilter==false && vm.isDashboard==false" style="padding-top: 24px;margin-left:-15px; margin-right:-15px;">
+            <div ng-if="vm.canReject && vm.status != 'Rejected' && vm.status != 'Pending' && vm.timeline.Id > 0" class="col-xs-4 col-lg-3">
+                <button name="btnReject" id="btnReject" class="btn btn-primary form-control" ng-click="vm.rejectData()">Reject</button>
+            </div>
+            <div ng-if="vm.isMyTask" ng-show="vm.isActivePage" class="col-xs-8" style="padding-right: 4px;">
+                <span ng-show="vm.timeline.Status === 'Lock'" style="background-color: #fff !important; color: #f39c12 !important; font-size:20px; margin-right: 5px;height:34px"
+                      class="label label-info ">{{vm.timeline.Status}}</span>
+
+                <button ng-if="vm.timeline.Id > 0 && (vm.status == 'Pending' || vm.status == 'Rejected') && vm.roleName == 'DH' && vm.seletedDepartment !== undefined"
+                        name="btnSubmit" id="btnSubmit" class="btn btn-primary " ng-click="vm.submitData()">
+                    Submit
+                </button>
+                <button ng-if="vm.timeline.Id > 0 && vm.status == 'Confirmed' && vm.roleName == 'GM'" name="btnApprove" id="btnApprove" class="btn btn-primary "
+                        ng-click="vm.approveData()">
+                    Approve
+                </button>
+                <button ng-if="vm.timeline.Id > 0 && vm.roleName == 'GM' && vm.seletedDepartment.FundId<0" name="btnApprove" id="btnApprove"
+                        class="btn btn-primary" ng-click="vm.approveAllData()">
+                    Approve all
+                </button>
+                <button ng-if="vm.timeline.Id > 0 && vm.status == 'Submitted' && vm.roleName == 'CTG'" name="btnConfirm" id="btnConfirm"
+                        class="btn btn-primary " ng-click="vm.confirmData()">
+                    Confirm
+                </button>
+                <button ng-if="vm.timeline.Id > 0 && vm.seletedDepartment.FundId<0 && vm.roleName == 'CTG'" name="btnConfirm" id="btnConfirm"
+                        class="btn btn-primary " ng-click="vm.confirmAllData()">
+                    Confirm all
+                </button>
+
+                <span ng-if="vm.timeline.Id > 0" style="background-color: #fff !important; color: #3C8DBC !important; font-size:20px;height:34px" class="label label-info ">{{vm.status == 'Rejected' ? 'Pending' : vm.status}}</span>
+
+            </div>
+            <div ng-if="!vm.isMyTask" ng-show="(vm.isActivePage && vm.showStatus)" class="col-xs-8" style="padding-left: 4px">
+                <span ng-show="vm.timeline.Status === 'Lock'" style="background-color: #fff !important; color: #f39c12 !important; font-size:20px;height:34px"
+                      class="label lead ">Locked</span>
+                <span ng-if="vm.timeline.Id > 0 && vm.status === 'Submitted'" ng-show="vm.seletedDepartment !== undefined" style="background-color: #fff !important; color: #3C8DBC !important; font-size:20px;height:34px"
+                      class="label lead " ng-class="{ 'label-info': vm.status == (vm.status == 'Approved' || vm.status == 'Submitted'), 'label-warning': (vm.status != 'Approved' && vm.status != 'Submitted') }">{{vm.status == 'Rejected' ? 'Pending' : vm.status}}</span>
+                <span ng-if="vm.timeline.Id > 0 && vm.status === 'Approved'" ng-show="vm.seletedDepartment !== undefined" style="background-color: #fff !important; color: #3C8DBC !important; font-size:20px;height:34px"
+                      class="label lead" ng-class="{ 'label-info': vm.status == (vm.status == 'Approved' || vm.status == 'Submitted'), 'label-warning': (vm.status != 'Approved' && vm.status != 'Submitted') }">{{vm.status == 'Rejected' ? 'Pending' : vm.status}}</span>
+                <span ng-if="vm.timeline.Id > 0 && (vm.status !== 'Submitted' && vm.status !== 'Approved')" ng-show="vm.seletedDepartment !== undefined"
+                      style="background-color: #fff !important; color: #f39c12 !important; font-size:20px;height:34px" class="label lead" ng-class="{ 'label-info': (vm.status == 'Approved' || vm.status == 'Submitted'), 'label-warning': (vm.status != 'Approved' && vm.status != 'Submitted') }">{{vm.status == 'Rejected' ? 'Pending' : vm.status}}</span>
+            </div>
+        </div>
+
+    </div>

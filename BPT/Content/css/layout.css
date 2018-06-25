@@ -1,0 +1,186 @@
+﻿body {
+}
+/* ADd css*/
+.btn {
+    border-radius: 2px !important;
+    outline: 0 !important;
+    border: 0 !important;
+    /*box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !important;*/
+}
+.btn:active {
+    /*box-shadow: 0 1px 2px rgba(0,0,0,0.16), 0 1px 2px rgba(0,0,0,0.23) !important ;*/
+}
+.row{
+    overflow-x:auto;
+}
+.btn i{
+    margin-left:8px !important;
+    margin-right:  4px !important;
+
+}
+.btn span{
+    margin-right:0 !important;  
+}
+
+.label{
+    border-radius: 2px !important;
+    vertical-align:middle;
+    display: inline-block;
+    padding: .3em;
+}
+.main-header{
+    max-height: inherit !important;
+}
+/*End add css*/
+.full-width-table {
+    width: 100%;
+}
+
+.glyphicon-asterisk:before {
+    content: none !important;
+    font-size: 0;
+}
+
+.glyphicon-asterisk:after {
+    color: #FF0000;
+    content: "(*)" !important;
+    display: inline;
+    margin-left: 5px;
+    font-style: italic;
+    font-weight: normal;
+}
+
+.filter-box {
+    margin-bottom: 5px;
+    margin-top: 5PX;
+}
+
+    .filter-box input, .filter-box button {
+        height: 34px;
+    }
+
+.ui-autocomplete {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 400px !important;
+}
+
+.ui-datepicker-calendar, .ui-datepicker-month {
+    display: none;
+}
+
+.ng-table-pager {
+    display: none;
+}
+
+.ng-table .edit-row input {
+    width: 100%;
+    border: none;
+    font-size: 14px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.ng-table .action-button {
+    min-width: 130px;
+}
+
+.action-button .glyphicon {
+    min-width: 30px;
+    font-size: 18px;
+}
+
+.ng-table .editing td {
+    padding: 0 !important;
+    vertical-align: middle;
+}
+
+.ng-table td {
+    line-height: 2.1 !important;
+}
+
+
+.ng-table .action-button {
+    vertical-align: middle;
+}
+
+.invalidrow {
+    opacity: 0.2;
+    cursor: not-allowed;
+}
+
+.display-alert {
+    display: block !important;
+    position: relative;
+    right: 0%;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#toast-container > div {
+    opacity: 1;
+    margin-top: 55px !important;
+}
+
+.btn {
+    margin-right: 5px;
+}
+
+.ng-table-header {
+    white-space: nowrap;
+}
+
+.sortable.sort-desc {
+    color: black;
+}
+
+.sortable.sort-asc {
+    color: black;
+}
+
+.view-row {
+    padding-right: 5px;
+    padding-right: 5px;
+    white-space: nowrap;
+}
+
+.full-width-table select {
+    min-width: 100px !important;
+    padding: 0;
+    text-overflow: ellipsis;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.ng-table th {
+    white-space: nowrap;
+}
+
+.ng-table ::-webkit-input-placeholder {
+    font-size: 12px;
+}
+
+.ng-table ::-moz-placeholder { /* Firefox 19+ */
+    font-size: 12px;
+}
+
+.ng-table :-ms-input-placeholder {
+    font-size: 12px;
+}
+
+.modal-dialog-800 {
+    width: 800px !important;
+}
+
+.label-submitted-status {
+    background-color: #fff !important;
+    color: #3C8DBC !important;
+}
+.label-pending-status {
+    background-color: #fff !important;
+    color: #f39c12 !important;
+}

@@ -1,0 +1,65 @@
+﻿<div class="container-fluid">haha
+    <div class="container">
+        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addNewUser">Create New <i class="fa fa-plus" aria-hidden="true"></i></button>
+    </div>
+    <div class="container">
+        <div class="input-group col-xs-4  pull-right filter-box" style="z-index:0">
+            <input type="text" class="form-control input-sm" placeholder="Filter" ng-model="search.$">
+            <span class="input-group-btn">
+                <button class="btn btn-default input-sm" type="button" ng-click="search.$ = ''" title="Clear">
+                    <i class="fa fa-times"></i>
+                </button>
+            </span>
+        </div>        
+    </div>
+    <div class="container">
+        <table class="table table-striped table-hover table-bordered full-width-table">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        ID
+                    </th>
+                    <th class="text-center">
+                        Name
+                    </th>
+                    <th class="text-center">
+                        Age
+                    </th>
+                    <th class="text-center">
+                        Address
+                    </th>
+                    <th class="col-xs-2 text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in vm.users | filter:search">
+                
+                    <td align="center">
+                        {{user.ID}}
+                    </td>
+        
+                    <td>
+                        {{user.Name}}
+                    </td>
+                    <td>
+                        {{user.Age}}
+                    </td>
+                    <td>
+                        {{user.Address}}
+                    </td>
+                    <td class="action-button">
+                        <i class="glyphicon glyphicon-pencil pointer" title="Edit" ng-click="vm.initUpdateUser(user)" data-toggle="modal" data-target="#editUser"></i>
+                        <i class="glyphicon glyphicon-trash pointer" title="Delete" ng-click="vm.initDeleteUser(user)" data-toggle="modal" data-target="#deleteUser"></i>
+                        <!--<button ng-click="vm.initUpdateUser(user)" class="btn btn-warning" data-toggle="modal" data-target="#editUser">Edit</button>
+                        <button ng-click="vm.initDeleteUser(user)" class="btn btn-danger" data-toggle="modal" data-target="#deleteUser">Delete</button>-->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<ng-include src="'app/pages/admin/user/create.html'"></ng-include>
+<ng-include src="'app/pages/admin/user/edit.html'"></ng-include>
+<ng-include src="'app/pages/admin/user/delete.html'"></ng-include>
+

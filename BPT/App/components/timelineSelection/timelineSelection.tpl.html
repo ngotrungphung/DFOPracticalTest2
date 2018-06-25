@@ -1,0 +1,53 @@
+﻿<div class="col-xs-2 filter-box form-inline" style="width: 18%;">
+    <label class="control-label">Planning Year </label>
+    <select class="form-control"
+            id="ddlTimelineYear"
+            name="ddlTimelineYear"
+            ng-model="vm.selectedYear"
+            ng-change="vm.loadTimeline()"
+            ng-options="year as year for year in vm.listYear track by year"
+            style="padding: 6px 6px;" >
+    </select>
+</div>
+<div class="col-xs-2 filter-box form-inline">
+    <label class="control-label">Plan Type </label>
+    <select name="ddlTimelinePlanType"
+            id="ddlTimelinePlanType"
+            class="form-control" 
+            ng-model="vm.timeline"
+            ng-options="timeline.Planning for timeline in vm.listTimeline track by timeline.Id"
+            ng-change="vm.selectTimeline()">
+        <option value="">----</option>
+    </select>
+</div>
+<div ng-if="vm.canReject && vm.status == 'Submitted' && vm.timeline.Id > 0" class="col-xs-1 form-group filter-box">
+    <div>
+        <button name="btnReject" id="btnReject" class="btn btn-primary form-control" ng-click="vm.rejectData()">Reject</button>
+    </div>
+</div>
+<div class="col-xs-2 filter-box form-inline">
+    <div ng-if="vm.isMyTask" ng-show="vm.isActivePage">
+        <div class="row">
+            <h3 ng-show="vm.timeline.Status === 'Lock'" style="margin-top: 0px;" class="col-xs-6">
+                <span style="background-color: #fff !important; color: #f39c12 !important;" class="label lead">Locked</span>
+            </h3>
+            <h3 ng-if="vm.timeline.Id > 0 && (vm.status != 'Pending' && vm.status != 'Rejected')" style="margin-top: 0px;" class="col-xs-6">
+                <span style="background-color: #fff !important; color: #3C8DBC !important;" class="label label-info" ng-class="{ 'label-info': vm.status == 'Submitted', 'label-warning': vm.status != 'Submitted'}">Submitted</span>
+            </h3>
+            <button ng-if="vm.timeline.Id > 0 && (vm.status == 'Pending' || vm.status == 'Rejected') && vm.timeline.Status == 'Open'" name="btnSubmit" id="btnSubmit" class="btn btn-primary form-control" ng-click="vm.submitData()">Submit</button>
+        </div>
+    </div>
+    <div ng-if="!vm.isMyTask" ng-show="vm.isActivePage">
+        <div class="row">
+            <h3 ng-show="vm.timeline.Status === 'Lock'" style="margin-top: 0px;" class="col-xs-6">
+                <span style="background-color: #fff !important; color: #f39c12 !important;" class="label lead">Locked</span>
+            </h3>
+            <h3 ng-if="vm.timeline.Id > 0 && vm.status == 'Submitted'" style="margin-top: 0px;" class="col-xs-6">
+                <span style="background-color: #fff !important; color: #3C8DBC !important;" class="label lead" ng-class="{ 'label-info': vm.status == 'Submitted', 'label-warning': vm.status != 'Submitted'}">Submitted</span>
+            </h3>
+            <h3 ng-if="vm.timeline.Id > 0 && vm.status != 'Submitted'" style="margin-top: 0px;" class="col-xs-6">
+                <span style="background-color: #fff !important; color: #f39c12 !important;" class="label lead" ng-class="{ 'label-info': vm.status == 'Submitted', 'label-warning': vm.status != 'Submitted'}">Pending</span>
+            </h3>
+        </div>
+    </div>
+</div>
